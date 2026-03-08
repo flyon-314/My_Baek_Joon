@@ -6,7 +6,6 @@
 #include <string>
 using namespace std;
 
-int apart[15][15];
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL); 
@@ -14,11 +13,7 @@ int main() {
 
     int a, b, v;
     cin >> a >> b >> v;
-    int m =  a - b;
-    int sol = v % m == 0 ? v / m : (v + m) / m;
-    int num = (sol * m) + b - v;
 
-    cout << sol - (num / m);
-    
+    cout << (v - b - 1) / (a - b) + 1;
     return 0;
 }
