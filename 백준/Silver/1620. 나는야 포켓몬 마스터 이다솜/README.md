@@ -4,15 +4,15 @@
 
 ### 성능 요약
 
-메모리: 25024 KB, 시간: 256 ms
+메모리: 31316 KB, 시간: 168 ms
 
 ### 분류
 
-자료 구조, 해시를 사용한 집합과 맵
+자료 구조, 집합과 맵, 해시를 사용한 집합과 맵
 
 ### 제출 일자
 
-2025년 3월 19일 14:18:00
+2026년 3월 9일 15:53:43
 
 ### 문제 설명
 
@@ -66,7 +66,7 @@
 
 <p>이다솜 : 그럼 꼬렛을 다시 잡으러 가야겠다. 영식아, 그리고 민식박사님 빠잉!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p5.PNG" style="height:179px; width:274px"></p>
+<p><img alt="" src="" style="height:179px; width:274px"></p>
 
 <p>이다솜 : 피카츄 공격!</p>
 
@@ -84,7 +84,7 @@
 
 <p>이다솜 : 여기가 사천왕과 대결하려면 가야하는 곳인가..</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p9.PNG" style="height:181px; width:274px"></p>
+<p><img alt="" src="" style="height:181px; width:274px"></p>
 
 <p>경비원 : 사천왕과 대결을 하려면, 마을의 체육관 리더를 이겨서 배지를 8개를 모아야 한다네... 배지를 모아서 오도록 하게</p>
 
