@@ -22,7 +22,7 @@ int main()
     bool sub = false;
     for (int i = 0 ; i < s.length() ; i++) {
         if (s[i] == '+' || s[i] == '-') {
-            sol += sub ? -stoi(s.substr(cut, i - cut + 1)) : stoi(s.substr(cut, i - cut + 1));
+            sol += sub ? -stoi(s.substr(cut, i - cut )) : stoi(s.substr(cut, i - cut));
             cut = i + 1;
             if (s[i] == '-') sub = true;
         }
