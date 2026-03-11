@@ -1,38 +1,29 @@
-#include <algorithm>
 #include <iostream>
-#include <queue>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <string>
+#include <unordered_map>
 using namespace std;
 
-int main(   )
+int dp[50001];
+int main()
 {
-    ios_base::sync_with_stdio();
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    int N;
-    cin >> N;
-    vector <int> v(N+1);
+    for (int i = 1; i * i < 50001; i++) dp[i * i] = 1;
 
-    for (int i = 1; i*i <= N; i++)
-    {
-        v[i * i] = 1;
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        if (dp[i] == 1) continue;
+        dp[i] = dp[i - 1] + 1;
+        for (int j = 1; j * j < i ; j++) dp[i] = min(dp[i - j * j] + 1,dp[i] );
     }
-    for (int i = 1; i <= N; i++)
-    {
-        if (v[i] != 1)
-        {
-            v[i] = v[i-1] + 1;
-            for (int j = 2; i - j * j > 0; j++)
-            {
-                v[i] = min(v[i], v[i - j * j] + 1);
-            }
-        }
-    }
-
-    cout << v[N];
+    cout << dp[n];
+    
+    return 0;
 }
