@@ -1,46 +1,44 @@
-#include <iosfwd>
 #include <iostream>
-#include <stdio.h>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <string>
+#include <unordered_map>
 
 using namespace std;
 int main()
 {
     ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin.tie(nullptr);
 
     int n;
     cin >> n;
-
-    int big[3];
-    int small[3];
-
-    int x, y, z;
-    cin >> x >> y >> z;
-
-    big[0] = x; small[0] = x;
-    big[1] = y; small[1] = y;
-    big[2] = z; small[2] = z;
-
-    for (int i = 1; i < n; i++)
-    {
-        cin >> x >> y >> z;
-        int temp1 = x, temp2 = y, temp3 = z;
-        temp1 += max(big[0], big[1]);
-        temp2 += max(big[1], max(big[2], big[0]));
-        temp3 += max(big[2], big[1]);
-        big[0] = temp1; big[1] = temp2; big[2] = temp3;
-
-        temp1 = x; temp2 = y; temp3 = z;
-        temp1 += min(small[0], small[1]);
-        temp2 += min(small[1], min(small[2], small[0]));
-        temp3 += min(small[2], small[1]);
-        small[0] = temp1; small[1] = temp2; small[2] = temp3;
+    
+    int min_dp1, min_dp2, min_dp3;
+    int max_dp1, max_dp2, max_dp3;
+    int n1, n2, n3;
+    
+    cin >> n1 >> n2 >> n3;
+    
+    min_dp1 = n1; min_dp2 = n2; min_dp3 = n3;
+    max_dp1 = n1; max_dp2 = n2; max_dp3 = n3;
+    for (int i = 1 ; i < n ; i++) {
+        cin >> n1 >> n2 >> n3;
+        int a, b, c;
+        a = n1 + min(min_dp1, min_dp2);
+        b = n2 + min(min_dp1, min(min_dp2, min_dp3) );
+        c = n3 + min(min_dp3, min_dp2);
+        min_dp1 = a; min_dp2 = b; min_dp3 = c;
+        
+        a = n1 + max(max_dp1, max_dp2);
+        b = n2 + max(max_dp2, max(max_dp1, max_dp3));
+        c = n3 + max(max_dp3, max_dp2);
+        max_dp1 = a; max_dp2 = b; max_dp3 = c;
     }
-
-    cout << max(big[0], max(big[1], big[2])) << " ";
-    cout << min(small[0], min(small[1], small[2])) << "\n";
+    cout << max(max_dp1, max(max_dp2, max_dp3))<< " ";
+    cout << min(min_dp1, min(min_dp2, min_dp3)) ;
     
     return 0;
 }
-    
