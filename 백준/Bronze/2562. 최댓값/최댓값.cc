@@ -1,27 +1,31 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <string>
+#include <unordered_map>
 
 using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-int main() {
+    int num = -1; 
+    int idx = 0;
+    int cur;
 
-	int num, max = -1;	int a;
+    for (int i = 1; i <= 9; i++) {
+        cin >> cur;
 
-	for (int i = 1; i <= 9; i++) {
+        if (cur > num) {
+            num = cur;
+            idx = i;
+        }
+    }
 
-		cin >> num;
-
-		if (num > max) {
-
-			max = num;
-
-			a = i;
-
-		}
-
-	}
-
-	cout << max << endl;
-
-	cout << a << endl;
-
+    cout << num << "\n" << idx << "\n";
+    return 0;
 }
