@@ -1,40 +1,34 @@
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <stack>
 #include <string>
+#include <unordered_map>
+
 using namespace std;
-
-int main(   )
+int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-
-    int n;
-    int count = 0;
-    int num = 666;
-    string str = " ";
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     
+    int n;
     cin >> n;
 
-    
-    while (true)
-    {
-        str = to_string(num);
-        if ( string::npos != str.find("666"))
-        {
-            count++;
-        }
+    int cnt = 0;
+    int num = 666;
+
+    while (true) {
+        string s = to_string(num);
         
-        if (n == count)
-        {
-            cout << str << "\n";
-            return 0;
+        if (s.find("666") != string::npos) cnt++;
+        if (cnt == n) {
+            cout << num ;
+            break;
         }
-        
+
         num++;
     }
-
-    
-    return 0;
 }
