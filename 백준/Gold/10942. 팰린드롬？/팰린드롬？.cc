@@ -10,17 +10,7 @@
 
 using namespace std;
 int num[2001];
-int recall[2001][2001];
-int palindrom(int s, int e)
-{
-    if (s >= e) return 1;
-    
-    if (recall[s][e] != 0) return recall[s][e];
-
-    if (num[s] == num[e]) return recall[s][e] = palindrom(s + 1, e - 1);
-    else return recall[s][e] = -1;
-    
-}
+int dp[2001][2001];
 int main()
 {
     ios::sync_with_stdio(false);
@@ -30,17 +20,22 @@ int main()
     cin >> n;
     for (int i = 1; i <= n; i++) {
         cin >> num[i];
-        recall[i][i] = 1;
+        dp[i][i] = 1;
     }
 
+    for (int i = 1 ; i <= n; i++) {
+        for (int j = 1; j + i<= n; j++){
+            if (num[j] == num[j + i]) {
+                if (i == 1) dp[j][j + i] = 1;
+                else if ( dp[j + 1][j + i -1] == 1)dp[j][j + i] = 1;
+            }
+        }
+    }
     int t;
     cin >> t;
     while (t--) {
         int s, e;
         cin >> s >> e;
-
-        int sol = palindrom(s, e);
-        if (sol == -1) cout << 0 << "\n";
-        else cout << sol << "\n";
+        cout << dp[s][e] << "\n";
     }
 }
