@@ -1,24 +1,34 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <string>
+#include <unordered_map>
+
 using namespace std;
 
-int main(){
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int n;
+    vector <pair <int, int> > v;
+
     cin >> n;
-    vector<pair<int,int>> people(n);
-    for(int i = 0; i < n; i++){
-        cin >> people[i].first >> people[i].second;
+    for (int i = 0; i < n; i++) {
+        int x, y;
+        cin >> x >> y;
+        v.push_back({x, y});
     }
-    
-    for(int i = 0; i < n; i++){
-        int rank = 1;
-        for(int j = 0; j < n; j++){
-            if(i == j) continue;
-            if(people[j].first > people[i].first && people[j].second > people[i].second){
-                rank++;
-            }
+
+    for (pair <int, int> i : v) {
+        int count = 0;
+        for (pair <int, int> j : v) {
+            if (j.first > i.first && j.second > i.second) count++;
         }
-        cout << rank << " ";
+        cout << ++count << " ";
     }
-    return 0;
 }
