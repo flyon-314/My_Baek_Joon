@@ -1,33 +1,40 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <set>
+#include <string>
+#include <unordered_map>
 
 using namespace std;
-int cnt=0;
-bool isused1[40];
-bool isused2[40];
-bool isused3[40];
-int n;
-void func(int k){
-    if(k==n){
-        cnt++;
+
+bool chess[16];
+bool line1[31];
+bool line2[31];
+int sol;
+void n_queen(int r, int s)
+{
+    if (r > s) {
+        sol++;
         return;
     }
-    for(int i=0;i<n;i++){
-        if(isused1[i]||isused2[i+k]||isused3[k-i+n-1]) continue;
-        isused1[i]=1;
-        isused2[k+i]=1;
-        isused3[k-i+n-1]=1;
-        func(k+1);
-        isused1[i]=0;
-        isused2[k+i]=0;
-        isused3[k-i+n-1]=0;
+    for (int i = 1; i <= s; i++) {
+        if (line1[r + i] || line2[s + r - i] || chess[i]) continue;
+        line1[r + i] = line2[s + r - i] = chess[i] = true;
+        n_queen(r + 1, s);
+        line1[r + i] = line2[s + r - i] = chess[i] = false;
     }
 }
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cin>>n;
-    func(0);
-    
-    cout<<cnt;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+    n_queen(1, n);
+    cout << sol;
     return 0;
 }
