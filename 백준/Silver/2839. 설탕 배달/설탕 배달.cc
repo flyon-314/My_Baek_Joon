@@ -1,42 +1,37 @@
-#include <algorithm>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <climits>
+#include <unordered_set>
+
 using namespace std;
 
-int main(   )
+int main()
 {
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
     int n;
-
     cin >> n;
 
-    int sugar[5000] = {0};
-
-    sugar[3] = 1;
-    sugar[5] = 1;
-    for (int i = 6 ; i <= n ; i++)
-    {
-        if (sugar[i-3] == 0 && sugar[i-5] == 0)
-            continue;
-        else if (sugar[i-3] == 0 || sugar[i-5] == 0)
-        {
-            sugar[i] = max(sugar[i-3], sugar[i-5])+1;
+    int anw = 0;
+    while (n >= 0) {
+        if (n % 5 == 0) {
+            anw += n / 5;
+            cout << anw ;
+            return 0;
         }
-        else 
-            sugar[i] = min(sugar[i-3], sugar[i-5])+1;
+        n -= 3;
+        anw++;
     }
 
-    if ( sugar[n] == 0 )
-        cout << -1 ;
-    else
-        cout << sugar[n];
-    
+    cout << -1;
     return 0;
-}
+    
+}   
