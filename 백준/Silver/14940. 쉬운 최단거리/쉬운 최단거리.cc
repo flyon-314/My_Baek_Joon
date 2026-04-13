@@ -1,78 +1,72 @@
-#include <algorithm>
 #include <iostream>
-#include <queue>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <climits>
+#include <stack>
+#include <unordered_set>
+
 using namespace std;
+
+int world[1001][1001];
+int anw[1001][1001];
 bool visited[1001][1001];
-int dx[4] = {0 ,-1 ,0 ,1};
-int dy[4] = {-1 , 0 ,1 ,0};
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, -1, 0, 1};
 
-int main(   )
+int main()
 {
-    ios_base::sync_with_stdio(NULL);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    int n ,m;
-    int num[1001][1001];
-    cin>>n>>m;
+    int n, m;
+    cin >> n >> m;
 
-    queue<pair<int,int> > q;
-    int x,y;
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<m;j++)
-        {
-            int temp;
-            cin>>temp;
-            if(temp==2)
-            {
-                y=i;
-                x=j;
-                num[i][j]=0;
-            }
-            else
-            {
-                num[i][j]=temp;
-            }
+    pair<int, int> target;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> world[i][j];
+            if (world[i][j] == 2) target = {i, j}; 
         }
     }
 
-    q.push(make_pair(y,x));
-    visited[y][x]=1;
+    queue <pair<int, int>> q;
+    visited[target.first][target.second] = true;
+    q.push(target);
 
-    while(!q.empty())
-    {
-        pair<int,int> p = q.front();
-        q.pop();
-
-        for (int dir = 0; dir < 4; dir++)
-        {
-            int ny = p.first + dy[dir];
-            int nx = p.second + dx[dir];
-
-            if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
-            if (num[ny][nx] == 0) continue;
-            if(visited[ny][nx]==1)continue;
-
-            num[ny][nx] +=num[p.first][p.second];
-            q.push(make_pair(ny,nx));
-            visited[ny][nx]=1;
+    int cnt = 1;
+    while (!q.empty()) {
+        int s = q.size();
+        
+        while (s--) {
+            pair<int, int> p = q.front();
+            q.pop();
             
+            for (int k = 0; k < 4; k++) {
+                int ny = p.first + dy[k];
+                int nx = p.second + dx[k];
+
+                if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
+                if (visited[ny][nx] || world[ny][nx] == 0) continue;
+
+                visited[ny][nx] = true;
+                anw [ny][nx] = cnt;
+                q.push({ny, nx});
+            }
         }
+        cnt++;
     }
 
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<m;j++)
-        {
-            if(visited[i][j]!=1 && num[i][j] != 0) cout<<-1<<" ";
-            else cout<<num[i][j]<<" ";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (!visited[i][j] && world[i][j] == 1) cout << -1 << " ";
+            else cout << anw[i][j] <<" ";
         }
         cout << "\n";
     }
-}
+}   
