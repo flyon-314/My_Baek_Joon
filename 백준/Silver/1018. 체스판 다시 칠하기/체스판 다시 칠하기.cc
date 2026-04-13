@@ -1,35 +1,53 @@
 #include <iostream>
-#include <string>
+#include <vector>
 #include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <climits>
+#include <stack>
+#include <unordered_set>
+
 using namespace std;
 
-int main(){
-    int N, M;
-    cin >> N >> M;
-    string board[50];
-    for (int i = 0; i < N; i++){
-        cin >> board[i];
+char board[51][51];
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, m;
+    cin >> n >> m;
+
+    for (int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        for (int j = 0; j < m; j++) board[i][j] = s[j];
     }
-    
-    int ans = 64;
-    for (int i = 0; i <= N - 8; i++){
-        for (int j = 0; j <= M - 8; j++){
-            int cntWhiteStart = 0;
-            int cntBlackStart = 0;
-            for (int x = 0; x < 8; x++){
-                for (int y = 0; y < 8; y++){
-                    char expectedForWhite = ((x + y) % 2 == 0) ? 'W' : 'B';
-                    char expectedForBlack = ((x + y) % 2 == 0) ? 'B' : 'W';
-                    if (board[i+x][j+y] != expectedForWhite)
-                        cntWhiteStart++;
-                    if (board[i+x][j+y] != expectedForBlack)
-                        cntBlackStart++;
+
+    int anw = 80;
+    for (int i = 0; i < n - 7; i++) {
+        for (int j = 0; j < m - 7; j++) {
+            for (int wb = 0; wb < 2; wb++) {
+                bool white = wb ? false : true;
+                int cnt = 0;
+                for (int y = i ; y < i + 8 ; y++) {
+                    white = !white;
+                    for (int x = j ; x < j + 8 ; x++) {
+                        if (board[y][x] == 'W' && !white) cnt++;
+                        else if (board[y][x] == 'B' && white) cnt++;
+                        white = !white;
+                    }
                 }
+
+                anw = min(anw, cnt);
             }
-            ans = min(ans, min(cntWhiteStart, cntBlackStart));
+            
         }
     }
-    
-    cout << ans << endl;
-    return 0;
-}
+
+    cout << anw;
+}   
