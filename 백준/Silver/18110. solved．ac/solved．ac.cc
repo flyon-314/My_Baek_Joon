@@ -1,48 +1,42 @@
-#include <algorithm>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
-#include <cmath>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
+#include <math.h>
+#include <queue>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <climits>
+#include <stack>
+#include <unordered_set>
+
 using namespace std;
 
-int main(   )
+int main()
 {
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
     int n;
     cin >> n;
 
-    if (n == 0)
-    {
-        cout << 0 << "\n";
+    if (n == 0) {
+        cout << 0 << endl;
         return 0;
     }
-
-    vector<int> problem;
-
-    for (int i = 0; i < n; i++)
-    {
-        int temp;
-        cin >> temp;
-        problem.push_back(temp);
+    vector <int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
 
-    sort(problem.begin(), problem.end());
+    sort(arr.begin(), arr.end());
 
-    
-    int cut = round((double)n * 0.15);
-    int sol = 0;
-    for (int i = 0 + cut ; i < n - cut; i++)
-    {
-        sol += problem[i];    
-    }
+    int cut = round(n * 0.15);
+    int new_n = n - cut * 2;
 
-    sol = round(sol / ((double)n - (double)cut * 2));
-    
-    cout << sol ;
-}
+    double sum = 0;
+    for (int i = cut ; i < n - cut ; i++) sum += arr[i];
+
+    cout << round(sum / new_n) ;
+}   
