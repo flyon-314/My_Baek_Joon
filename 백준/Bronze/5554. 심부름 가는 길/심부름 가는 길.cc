@@ -1,21 +1,15 @@
 #include <iostream>
 
-#include <string>
-
 using namespace std;
 
-int main(int argc, char* argv[])
+int main() {
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
 
-{
+    int total_seconds = a + b + c + d;
 
-	int a, b, c, d;
+    cout << total_seconds / 60 << endl;
+    cout << total_seconds % 60 << endl;
 
-	cin >> a >> b >> c >> d;
-
-	cout << (a + b + c + d) / 60 << endl;
-
-	cout << (a + b + c + d) % 60 << endl;
-
-	return 0;
-
+    return 0;
 }
