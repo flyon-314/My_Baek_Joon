@@ -1,39 +1,22 @@
 #include <iostream>
-
-#include <cstring>
-
-#include <algorithm>
-
-#include <vector>
-
-#include <cmath>
+#include <string>
 
 using namespace std;
 
-#define fast ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0)
-
-#define ll long long
-
 int main() {
-
-    fast;
-
-    string n;
-
+    string name;
     int age, weight;
 
-    while (1) {
+    while (cin >> name >> age >> weight) {
+        if (name == "#" && age == 0 && weight == 0) break;
 
-        cin >> n >> age >> weight;
-
-        if (n == "#" && age == 0 && weight == 0) break;
-
-        if (age > 17 || weight >= 80) cout << n << " Senior\n";
-
-        else cout << n << " Junior\n";
-
+        if (age > 17 || weight >= 80) {
+            cout << name << " Senior" << endl;
+        } 
+        else {
+            cout << name << " Junior" << endl;
+        }
     }
 
     return 0;
-
 }
